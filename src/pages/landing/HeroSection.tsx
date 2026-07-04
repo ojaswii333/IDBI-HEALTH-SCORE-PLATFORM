@@ -1,49 +1,16 @@
 import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ShieldCheck, Activity, TrendingUp } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Activity, LineChart, ShieldCheck } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { AnimatePresence } from 'framer-motion';
-
-const backgrounds = ['/bg-1.png', '/bg-2.png', '/bg-3.png'];
-
-// Staggered text component for premium reveal
-function StaggeredText({ text, highlightWord }: { text: string, highlightWord?: string }) {
-  const words = text.split(" ");
-  return (
-    <>
-      {words.map((word, i) => {
-        const isHighlight = highlightWord && word.includes(highlightWord);
-        const cleanWord = word.replace('<br/>', '');
-        return (
-          <span key={i} style={{ display: 'inline-block', overflow: 'hidden', marginRight: word.includes('<br>') ? 0 : '0.3em' }}>
-            <motion.span
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              style={{ 
-                display: 'inline-block', 
-                color: isHighlight ? 'var(--accent-secondary)' : 'inherit' 
-              }}
-            >
-              {cleanWord}
-            </motion.span>
-            {word.includes('<br/>') && <br/>}
-          </span>
-        );
-      })}
-    </>
-  );
-}
 
 function LiveHealthCard() {
   const [score, setScore] = useState(300);
   
-  // 3D Parallax state
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
-  const rotateX = useTransform(mouseY, [-100, 100], [10, -10]);
-  const rotateY = useTransform(mouseX, [-100, 100], [-10, 10]);
+  const rotateX = useTransform(mouseY, [-200, 200], [10, -10]);
+  const rotateY = useTransform(mouseX, [-200, 200], [-10, 10]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -59,116 +26,93 @@ function LiveHealthCard() {
   };
   
   useEffect(() => {
-    const dur = 2000, start = 300, end = 782, t0 = Date.now();
+    const dur = 2500, start = 300, end = 842, t0 = Date.now();
     const anim = () => {
       const p = Math.min((Date.now() - t0) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 4); // easeOutQuart
+      const e = 1 - Math.pow(1 - p, 4);
       setScore(Math.round(start + (end - start) * e));
       if (p < 1) requestAnimationFrame(anim);
     };
-    // Delay start for cinematic effect
-    setTimeout(() => requestAnimationFrame(anim), 800);
+    setTimeout(() => requestAnimationFrame(anim), 1000);
   }, []);
-
-  const pct = ((score - 300) / 600) * 100;
-  const circ = 2 * Math.PI * 80;
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 40, rotateX: 20, scale: 0.9 }}
+      initial={{ opacity: 0, y: 100, rotateX: 20, scale: 0.8 }}
       animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-      transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 1.4, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
-        width: 380,
-        background: 'rgba(255, 255, 255, 0.03)',
-        backdropFilter: 'blur(30px)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
+        width: 420,
+        background: 'rgba(24, 24, 27, 0.6)',
+        backdropFilter: 'blur(40px)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
         borderRadius: 32,
         padding: 40,
-        boxShadow: '0 30px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05)',
+        boxShadow: '0 40px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1)',
         position: 'relative',
         transformStyle: 'preserve-3d',
         rotateX,
         rotateY,
-        perspective: 1000
+        perspective: 1200
       }}
     >
-      <div style={{ position: 'absolute', inset: -10, background: 'radial-gradient(circle at 50% 0%, rgba(245, 130, 32, 0.15), transparent 60%)', borderRadius: 'inherit', pointerEvents: 'none' }} />
-      <div style={{ position: 'relative', zIndex: 2 }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Activity size={16} color="white" />
+      <div style={{ position: 'absolute', inset: -20, background: 'radial-gradient(circle at 50% 0%, rgba(0, 131, 108, 0.15), transparent 70%)', borderRadius: 'inherit', pointerEvents: 'none' }} />
+      
+      <div style={{ position: 'relative', zIndex: 2, transform: 'translateZ(30px)' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <div style={{ width: 40, height: 40, borderRadius: 12, background: 'var(--bg-elevated)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <BrainCircuit size={20} color="var(--accent)" />
+            </div>
+            <div>
+              <div style={{ fontWeight: 600, fontSize: '1rem', letterSpacing: '-0.01em' }}>Intelligence Engine</div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Live Assessment</div>
+            </div>
           </div>
-          <span style={{ fontWeight: 600, fontSize: '0.875rem' }}>AI Health Score</span>
+          <div style={{ padding: '6px 12px', background: 'rgba(34, 197, 94, 0.1)', color: '#4ADE80', borderRadius: 100, fontSize: '0.75rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{ width: 6, height: 6, borderRadius: 3, background: '#4ADE80', boxShadow: '0 0 8px #4ADE80' }} />
+            Processing
+          </div>
         </div>
-        <div style={{ padding: '4px 10px', background: 'rgba(34, 197, 94, 0.15)', color: '#4ADE80', borderRadius: 100, fontSize: '0.6875rem', fontWeight: 600 }}>
-          Excellent
-        </div>
-      </div>
 
-      <div style={{ position: 'relative', width: 180, height: 180, margin: '0 auto 32px' }}>
-        <svg width="180" height="180" viewBox="0 0 180 180" style={{ transform: 'rotate(-90deg)' }}>
-          <circle cx="90" cy="90" r="80" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="12" />
-          <circle cx="90" cy="90" r="80" fill="none" stroke="var(--info)" strokeWidth="12"
-            strokeLinecap="round" strokeDasharray={circ} strokeDashoffset={circ - (pct / 100) * circ}
-            style={{ transition: 'stroke-dashoffset 2s cubic-bezier(0.16, 1, 0.3, 1)' }} />
-        </svg>
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ fontSize: '3.5rem', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1 }}>{score}</div>
-          <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)', marginTop: 4 }}>out of 900</div>
+        <div style={{ textAlign: 'center', marginBottom: 40 }}>
+          <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: 600 }}>Dynamic Health Score</div>
+          <div style={{ fontSize: '5rem', fontWeight: 800, letterSpacing: '-0.05em', lineHeight: 1, background: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.5) 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            {score}
+          </div>
         </div>
-      </div>
 
-      <div style={{ display: 'flex', gap: 16 }}>
-        <div style={{ flex: 1, padding: 16, background: 'rgba(0,0,0,0.2)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>Credit Limit</div>
-          <div style={{ fontSize: '1.125rem', fontWeight: 600 }}>₹24.5L</div>
-        </div>
-        <div style={{ flex: 1, padding: 16, background: 'rgba(0,0,0,0.2)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.05)' }}>
-          <div style={{ fontSize: '0.6875rem', color: 'rgba(255,255,255,0.6)', marginBottom: 4 }}>Default Risk</div>
-          <div style={{ fontSize: '1.125rem', fontWeight: 600, color: '#4ADE80' }}>Low</div>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+          <div style={{ padding: 20, background: 'rgba(0,0,0,0.3)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.03)' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}><LineChart size={14}/> Pre-approved Limit</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>₹45.5L</div>
+          </div>
+          <div style={{ padding: 20, background: 'rgba(0,0,0,0.3)', borderRadius: 20, border: '1px solid rgba(255,255,255,0.03)' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}><Activity size={14}/> Default Probability</div>
+            <div style={{ fontSize: '1.5rem', fontWeight: 700, color: '#4ADE80' }}>1.2%</div>
+          </div>
         </div>
       </div>
       
-      {/* Floating Badges */}
+      {/* Floating Elements */}
       <motion.div 
-        animate={{ y: [0, -10, 0] }} 
-        transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-        style={{ position: 'absolute', top: 40, right: -40, padding: '10px 16px', background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, boxShadow: 'var(--shadow-lg)' }}
+        animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }} 
+        transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
+        style={{ position: 'absolute', top: -20, right: -40, padding: '12px 20px', background: 'var(--bg-surface)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 10, boxShadow: '0 20px 40px rgba(0,0,0,0.4)', transform: 'translateZ(60px)' }}
       >
-        <ShieldCheck size={16} color="var(--success)" />
-        <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>RBI Ready</span>
+        <ShieldCheck size={18} color="var(--success)" />
+        <span style={{ fontSize: '0.875rem', fontWeight: 600 }}>RBI Compliant</span>
       </motion.div>
-
-      <motion.div 
-        animate={{ y: [0, 10, 0] }} 
-        transition={{ repeat: Infinity, duration: 5, ease: 'easeInOut', delay: 1 }}
-        style={{ position: 'absolute', bottom: 60, left: -50, padding: '10px 16px', background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, boxShadow: 'var(--shadow-lg)' }}
-      >
-        <TrendingUp size={16} color="var(--accent)" />
-        <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>+42 Points YoY</span>
-      </motion.div>
-      </div>
     </motion.div>
   );
 }
 
 export default function HeroSection() {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
-
-  const [bgIndex, setBgIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % backgrounds.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
+  const y = useTransform(scrollY, [0, 1000], [0, 300]);
+  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
 
   return (
     <section style={{ 
@@ -177,83 +121,61 @@ export default function HeroSection() {
       alignItems: 'center', 
       position: 'relative', 
       overflow: 'hidden',
-      background: '#050505'
+      background: '#000'
     }}>
       
-      {/* Background Slideshow & Gradients */}
+      {/* Cinematic Tech Grid Background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={bgIndex}
-            src={backgrounds[bgIndex]}
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 0.25, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: 'easeInOut' }}
-            style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
-            alt="Enterprise Banking Background"
-          />
-        </AnimatePresence>
-        
-        {/* Animated Tech Grid */}
         <div style={{ 
           position: 'absolute', inset: 0, 
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-          backgroundSize: '50px 50px',
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
           backgroundPosition: 'center center',
-          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
-          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
-          zIndex: 1,
-          pointerEvents: 'none'
-        }}>
-          <motion.div 
-            animate={{ backgroundPosition: ['0px 0px', '0px 50px'] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-            style={{ position: 'absolute', inset: 0, backgroundImage: 'inherit', backgroundSize: 'inherit' }}
-          />
-        </div>
-
-        {/* Deep Dark Gradients to ensure text readability */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(5,5,5,1) 0%, rgba(5,5,5,0.6) 50%, transparent 100%)', zIndex: 2 }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top right, rgba(0, 131, 108, 0.2), transparent 40%), radial-gradient(circle at bottom left, rgba(245, 130, 32, 0.15), transparent 40%)', zIndex: 2 }} />
+          maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
+        }} />
         
-        {/* Floating Glass Orbs */}
+        {/* Massive blurred IDBI color orbs */}
         <motion.div 
-          animate={{ x: [0, 40, 0], y: [0, -40, 0], rotate: [0, 90, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', top: '10%', right: '15%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,131,108,0.4) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 1 }}
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', top: '10%', right: '20%', width: '40vw', height: '40vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,131,108,0.15) 0%, transparent 70%)', filter: 'blur(80px)', transformOrigin: 'center center' }}
         />
         <motion.div 
-          animate={{ x: [0, -30, 0], y: [0, 50, 0], rotate: [0, -90, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', bottom: '20%', left: '10%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,130,32,0.2) 0%, transparent 70%)', filter: 'blur(50px)', zIndex: 1 }}
+          animate={{ rotate: -360, scale: [1, 1.5, 1] }}
+          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', bottom: '-10%', left: '10%', width: '50vw', height: '50vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,130,32,0.1) 0%, transparent 70%)', filter: 'blur(100px)', transformOrigin: 'center center' }}
         />
       </div>
 
-      <motion.div style={{ y, opacity, width: '100%', position: 'relative', zIndex: 10 }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '120px 24px', display: 'flex', gap: 64 }} className="landing-hero-flex">
+      <motion.div style={{ y, opacity, width: '100%', position: 'relative', zIndex: 10, paddingTop: 80 }}>
+        <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 32px', display: 'flex', flexDirection: 'column', gap: 64, '@media (minWidth: 1024px)': { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' } } as any} className="landing-hero-flex">
           
-          <div style={{ flex: 1, maxWidth: 600, zIndex: 10 }}>
+          <div style={{ flex: 1, maxWidth: 650, zIndex: 10 }}>
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 100, marginBottom: 32, fontSize: '0.8125rem', fontWeight: 500, backdropFilter: 'blur(10px)' }}>
-                <span style={{ width: 8, height: 8, borderRadius: 4, background: 'var(--success)', boxShadow: '0 0 10px var(--success)' }} />
-                IDBI Digital Transformation 2.0
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 100, marginBottom: 40, fontSize: '0.875rem', fontWeight: 500 }}>
+                <span style={{ width: 8, height: 8, borderRadius: 4, background: 'var(--success)', boxShadow: '0 0 12px var(--success)' }} />
+                The Future of MSME Underwriting
               </div>
-              <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 24, display: 'flex', flexWrap: 'wrap' }}>
-                <StaggeredText text="Intelligent banking for the ambitious." highlightWord="ambitious." />
+              
+              <h1 style={{ fontSize: 'clamp(3.5rem, 7vw, 6rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 32 }}>
+                Intelligence <br/>
+                <span style={{ color: 'var(--text-secondary)' }}>that scales </span>
+                India.
               </h1>
-              <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 48, maxWidth: 500 }}>
-                A highly secure, AI-driven financial platform designed exclusively to give Indian MSMEs unprecedented visibility and access to credit.
+              
+              <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 48, maxWidth: 500, fontWeight: 400 }}>
+                A highly secure, AI-driven financial platform designed exclusively to give Indian MSMEs unprecedented visibility and access to institutional credit.
               </p>
               
-              <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-                <Link to="/login" className="btn btn-primary btn-lg" style={{ padding: '18px 36px', fontSize: '1rem', borderRadius: 12, boxShadow: '0 8px 24px rgba(245, 130, 32, 0.25)' }}>
-                  Enter Platform <ArrowRight size={18} />
+              <div style={{ display: 'flex', gap: 20, alignItems: 'center' }}>
+                <Link to="/login" className="btn btn-primary" style={{ padding: '20px 40px', fontSize: '1rem', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600, background: 'white', color: 'black' }}>
+                  Start Assessment <ArrowRight size={18} />
                 </Link>
-                <Link to="/login" className="btn btn-ghost btn-lg" style={{ padding: '18px 24px', fontSize: '1rem', color: 'var(--text-primary)' }}>
-                  Read the manifest
+                <Link to="/login" style={{ padding: '20px 32px', fontSize: '1rem', fontWeight: 600, color: 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+                  View Architecture
                 </Link>
               </div>
             </motion.div>
@@ -265,9 +187,6 @@ export default function HeroSection() {
 
         </div>
       </motion.div>
-      
-      {/* Abstract Background Elements */}
-      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: '50%', background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.2))', zIndex: 1, pointerEvents: 'none' }} />
     </section>
   );
 }

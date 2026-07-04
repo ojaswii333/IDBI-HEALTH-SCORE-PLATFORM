@@ -5,6 +5,17 @@
    Inspired by Stripe, Mercury, Linear, Apple
    ============================================ */
 
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
 :root {
   /* Zinc-based neutral palette */
   --bg-app: #09090B;

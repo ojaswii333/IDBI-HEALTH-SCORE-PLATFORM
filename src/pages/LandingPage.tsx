@@ -1,13 +1,18 @@
-import { Link } from 'react-router-dom';
-import IDBILogo from '../components/IDBILogo';
+import { useState, useEffect } from 'react';
 import Preloader from '../components/Preloader';
 import CustomCursor from '../components/CustomCursor';
+import Header from './landing/Header';
 import HeroSection from './landing/HeroSection';
-import FeaturesSection from './landing/FeaturesSection';
-import JourneySection from './landing/JourneySection';
-import TrustSection from './landing/TrustSection';
+import TrustedBySection from './landing/TrustedBySection';
+import HowItWorksSection from './landing/HowItWorksSection';
+import ProductShowcaseSection from './landing/ProductShowcaseSection';
+import FinancialJourneySection from './landing/FinancialJourneySection';
+import GrowthInsightsSection from './landing/GrowthInsightsSection';
+import SecuritySection from './landing/SecuritySection';
+import FutureOfBankingSection from './landing/FutureOfBankingSection';
+import FaqSection from './landing/FaqSection';
 import CtaSection from './landing/CtaSection';
-import { useState, useEffect } from 'react';
+import PremiumFooter from './landing/PremiumFooter';
 
 export default function LandingPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -19,31 +24,26 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div style={{ minHeight: '100vh', background: 'var(--bg-app)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
+    <div style={{ minHeight: '100vh', background: '#050505', color: 'white', overflowX: 'hidden' }}>
       <CustomCursor />
       {!isLoaded && <Preloader onComplete={() => setIsLoaded(true)} />}
       
-      {/* Navigation */}
-      <nav style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: 'rgba(9,9,11,0.85)', backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)'
-      }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '20px 24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <IDBILogo size={36} />
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-            <Link to="/login" className="btn btn-ghost" style={{ fontWeight: 600 }}>Sign In</Link>
-            <Link to="/login" className="btn btn-primary" style={{ borderRadius: 100, padding: '10px 20px' }}>Open Account</Link>
-          </div>
-        </div>
-      </nav>
-
-      <HeroSection />
-      <FeaturesSection />
-      <JourneySection />
-      <TrustSection />
-      <CtaSection />
+      <Header />
       
+      <main>
+        <HeroSection />
+        <TrustedBySection />
+        <HowItWorksSection />
+        <ProductShowcaseSection />
+        <FinancialJourneySection />
+        <GrowthInsightsSection />
+        <SecuritySection />
+        <FutureOfBankingSection />
+        <FaqSection />
+        <CtaSection />
+      </main>
+
+      <PremiumFooter />
     </div>
   );
 }

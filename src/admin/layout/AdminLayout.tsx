@@ -4,9 +4,10 @@ import { useTheme } from '../../auth/ThemeContext';
 import {
   LayoutDashboard, Users, ClipboardCheck, Sparkles, BarChart3, Activity,
   Trophy, GitCompareArrows, ShieldAlert, ScrollText, Map, RefreshCw,
-  DatabaseZap, Gauge, Server, LogOut, Sun, Moon, Search, Bell, Settings,
+  DatabaseZap, Gauge, Server, LogOut, Sun, Moon, Search, Bell, Settings, Menu
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { pageTransition } from '../../shared/animations';
 import IDBILogo from '../../components/IDBILogo';
 
@@ -52,12 +53,21 @@ export default function AdminLayout() {
   const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => { logout(); navigate('/login'); };
 
   return (
     <div className="app-layout">
-      <aside className="app-sidebar" style={{ width: 256 }}>
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          onClick={() => setIsSidebarOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 90 }} 
+        />
+      )}
+      
+      <aside className={`app-sidebar ${isSidebarOpen ? 'open' : ''}`} style={{ width: 256 }}>
         <div style={{ padding: '16px 16px 12px', borderBottom: '1px solid var(--border)' }}>
           <IDBILogo size={28} />
           <div style={{ marginTop: 12, paddingLeft: 4 }}>
@@ -99,9 +109,16 @@ export default function AdminLayout() {
         </div>
       </aside>
 
-      <div className="app-main" style={{ marginLeft: 256 }}>
+      <div className="app-main">
         <header className="app-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+            <button 
+              className="btn btn-icon" 
+              onClick={() => setIsSidebarOpen(true)}
+              style={{ display: 'inline-flex', padding: 0, marginRight: 12 }}
+            >
+              <Menu size={20} color="var(--text-primary)" className="mobile-menu-btn" />
+            </button>
             <Search size={14} style={{ color: 'var(--text-muted)' }} />
             <input placeholder="Search customers, applications..." style={{
               background: 'none', border: 'none', outline: 'none', color: 'var(--text-primary)',

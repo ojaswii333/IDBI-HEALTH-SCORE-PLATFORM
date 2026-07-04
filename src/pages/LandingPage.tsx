@@ -34,7 +34,14 @@ export default function LandingPage() {
       
       <Header />
       
-      <main style={{ position: 'relative', zIndex: 10 }}>
+      <main style={{ position: 'relative', zIndex: 10, background: 'var(--bg-app)' }}>
+        {/* Seamless global background pattern */}
+        <div style={{ position: 'fixed', inset: 0, zIndex: -1, pointerEvents: 'none' }}>
+          <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(rgba(0,131,108,0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+          <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(0, 131, 108, 0.08) 0%, transparent 60%)', filter: 'blur(80px)' }} />
+          <div style={{ position: 'absolute', bottom: '-10%', right: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(245, 130, 32, 0.05) 0%, transparent 60%)', filter: 'blur(80px)' }} />
+        </div>
+
         <HeroSection />
         <TrustedBySection />
         <FutureOfBankingSection />

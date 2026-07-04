@@ -4,9 +4,10 @@ import { useTheme } from '../../auth/ThemeContext';
 import {
   LayoutDashboard, CreditCard, BadgeCheck, MessageSquare,
   BarChart3, FileText, FolderLock, Settings, LogOut, Sun, Moon, Search,
-  PieChart, UserCircle, Bell
+  PieChart, UserCircle, Bell, Menu
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { pageTransition } from '../../shared/animations';
 import IDBILogo from '../../components/IDBILogo';
 
@@ -42,13 +43,22 @@ export default function CustomerLayout() {
   const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
   const navigate = useNavigate();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => { logout(); navigate('/login'); };
 
   return (
     <div className="app-layout">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          onClick={() => setIsSidebarOpen(false)}
+          style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', zIndex: 90 }} 
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="app-sidebar">
+      <aside className={`app-sidebar ${isSidebarOpen ? 'open' : ''}`}>
         {/* Brand */}
         <div style={{ padding: '16px 16px 12px', borderBottom: '1px solid var(--border)' }}>
           <IDBILogo size={28} />
@@ -97,6 +107,13 @@ export default function CustomerLayout() {
       <div className="app-main">
         <header className="app-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, flex: 1 }}>
+            <button 
+              className="btn btn-icon" 
+              onClick={() => setIsSidebarOpen(true)}
+              style={{ display: 'inline-flex', padding: 0, marginRight: 12 }}
+            >
+              <Menu size={20} color="var(--text-primary)" className="mobile-menu-btn" />
+            </button>
             <Search size={14} style={{ color: 'var(--text-muted)' }} />
             <input placeholder="Search..." style={{
               background: 'none', border: 'none', outline: 'none', color: 'var(--text-primary)',

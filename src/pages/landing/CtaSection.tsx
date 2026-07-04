@@ -14,7 +14,7 @@ export default function CtaSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
 
   return (
-    <section ref={containerRef} style={{ padding: '200px 24px', background: '#050505', position: 'relative', overflow: 'hidden' }}>
+    <section ref={containerRef} style={{ padding: '200px 24px', background: 'transparent', position: 'relative', overflow: 'hidden' }}>
       
       {/* Cinematic Glowing Background Core */}
       <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '60vw', height: '60vw', background: 'radial-gradient(circle, rgba(0, 131, 108, 0.15) 0%, transparent 60%)', filter: 'blur(100px)', pointerEvents: 'none' }} />

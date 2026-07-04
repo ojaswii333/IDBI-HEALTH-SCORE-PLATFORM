@@ -13,7 +13,7 @@ export default function SecuritySection() {
   const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
 
   return (
-    <section ref={containerRef} style={{ padding: '160px 24px', background: '#000', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
+    <section ref={containerRef} style={{ padding: '160px 24px', background: 'transparent', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
       
       {/* Background Lock Icon Graphic */}
       <motion.div 

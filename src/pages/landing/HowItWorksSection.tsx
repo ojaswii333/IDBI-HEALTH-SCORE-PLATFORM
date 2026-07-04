@@ -31,7 +31,7 @@ export default function HowItWorksSection() {
   });
 
   return (
-    <section ref={containerRef} style={{ position: 'relative', height: '300vh', background: '#050505' }}>
+    <section ref={containerRef} style={{ position: 'relative', height: '300vh', background: 'transparent' }}>
       
       <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
         <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '0 32px', display: 'flex', gap: 64, '@media (minWidth: 1024px)': { flexDirection: 'row' } } as any} className="landing-timeline-flex">

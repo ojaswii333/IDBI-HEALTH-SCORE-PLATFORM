@@ -121,30 +121,30 @@ export default function HeroSection() {
       alignItems: 'center', 
       position: 'relative', 
       overflow: 'hidden',
-      background: '#000'
+      background: 'transparent'
     }}>
       
       {/* Cinematic Tech Grid Background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <div style={{ 
           position: 'absolute', inset: 0, 
-          backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
           backgroundSize: '60px 60px',
           backgroundPosition: 'center center',
           maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
           WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
         }} />
         
-        {/* Massive blurred IDBI color orbs */}
+        {/* Floating 3D Geometric Shapes for "Fascinating" factor */}
         <motion.div 
-          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', top: '10%', right: '20%', width: '40vw', height: '40vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,131,108,0.15) 0%, transparent 70%)', filter: 'blur(80px)', transformOrigin: 'center center' }}
+          animate={{ y: [0, -40, 0], rotateX: [0, 180, 360], rotateY: [0, 180, 360] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          style={{ position: 'absolute', top: '15%', right: '35%', width: 120, height: 120, background: 'linear-gradient(135deg, rgba(0,131,108,0.4), rgba(245,130,32,0.4))', backdropFilter: 'blur(10px)', borderRadius: 30, transformStyle: 'preserve-3d', border: '1px solid rgba(255,255,255,0.2)' }}
         />
         <motion.div 
-          animate={{ rotate: -360, scale: [1, 1.5, 1] }}
-          transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          style={{ position: 'absolute', bottom: '-10%', left: '10%', width: '50vw', height: '50vw', borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,130,32,0.1) 0%, transparent 70%)', filter: 'blur(100px)', transformOrigin: 'center center' }}
+          animate={{ y: [0, 50, 0], rotate: [0, -180, -360], scale: [1, 1.2, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          style={{ position: 'absolute', bottom: '20%', left: '40%', width: 80, height: 80, background: 'linear-gradient(135deg, rgba(245,130,32,0.4), rgba(0,131,108,0.4))', backdropFilter: 'blur(10px)', borderRadius: '50%', border: '1px solid rgba(255,255,255,0.2)' }}
         />
       </div>
 

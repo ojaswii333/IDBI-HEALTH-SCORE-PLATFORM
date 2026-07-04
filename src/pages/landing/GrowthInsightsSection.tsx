@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 export default function GrowthInsightsSection() {
   return (
-    <section style={{ padding: '160px 24px', background: 'var(--bg-surface)', borderTop: '1px solid var(--border)' }}>
+    <section className="responsive-padding" style={{ background: 'var(--bg-app)', borderTop: '1px solid var(--border)' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
         <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 24 }}>
           Don't just track growth. <br/><span style={{ color: 'var(--accent-secondary)' }}>Predict it.</span>
@@ -34,7 +34,7 @@ export default function GrowthInsightsSection() {
               }}
             >
               <div style={{ position: 'relative', zIndex: 2 }}>
-                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'rgba(255,255,255,0.05)', marginBottom: 24, lineHeight: 1 }}>0{i+1}</div>
+                <div style={{ fontSize: '3rem', fontWeight: 800, color: 'var(--bg-muted)', marginBottom: 24, lineHeight: 1 }}>0{i+1}</div>
                 <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: 16 }}>{item.title}</h3>
                 <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>{item.desc}</p>
               </div>

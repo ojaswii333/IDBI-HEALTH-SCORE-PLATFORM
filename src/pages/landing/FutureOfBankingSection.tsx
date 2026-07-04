@@ -14,8 +14,8 @@ export default function FutureOfBankingSection() {
           style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           alt="IDBI Future Banking"
         />
-        {/* Dark overlay */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,1) 100%)' }} />
+        {/* Light overlay */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,1) 100%)' }} />
       </div>
 
       <motion.div 
@@ -25,7 +25,7 @@ export default function FutureOfBankingSection() {
         transition={{ duration: 1 }}
         style={{ position: 'relative', zIndex: 10, textAlign: 'center', maxWidth: 900, padding: '0 24px' }}
       >
-        <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 32 }}>
+        <h2 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 32, color: 'var(--text-primary)' }}>
           Welcome to the new era <br/> of institutional banking.
         </h2>
         <p style={{ fontSize: '1.5rem', color: 'var(--text-secondary)', fontWeight: 500 }}>

@@ -31,10 +31,10 @@ export default function HowItWorksSection() {
   });
 
   return (
-    <section ref={containerRef} style={{ position: 'relative', height: '300vh', background: 'transparent' }}>
+    <section ref={containerRef} style={{ position: 'relative', height: '300vh', background: 'var(--bg-surface)' }}>
       
       <div style={{ position: 'sticky', top: 0, height: '100vh', display: 'flex', alignItems: 'center', overflow: 'hidden' }}>
-        <div style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '0 32px', display: 'flex', gap: 64, '@media (minWidth: 1024px)': { flexDirection: 'row' } } as any} className="landing-timeline-flex">
+        <div className="responsive-flex" style={{ maxWidth: 1400, margin: '0 auto', width: '100%', padding: '0 24px' }}>
           
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.1, marginBottom: 24 }}>
@@ -46,7 +46,7 @@ export default function HowItWorksSection() {
           </div>
 
           <div style={{ flex: 1, position: 'relative', height: '60vh', display: 'flex', alignItems: 'center' }}>
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 2, background: 'rgba(255,255,255,0.05)' }}>
+            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 2, background: 'var(--border)' }}>
               <motion.div style={{ width: '100%', height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]), background: 'var(--accent)', originY: 0 }} />
             </div>
 
@@ -66,10 +66,10 @@ export default function HowItWorksSection() {
 
                 return (
                   <motion.div key={i} style={{ opacity, x, position: 'relative' }}>
-                    <div style={{ position: 'absolute', left: -46, top: 0, width: 14, height: 14, borderRadius: 7, background: '#050505', border: '2px solid var(--accent)', zIndex: 2 }} />
+                    <div style={{ position: 'absolute', left: -46, top: 0, width: 14, height: 14, borderRadius: 7, background: 'var(--bg-surface)', border: '2px solid var(--accent)', zIndex: 2 }} />
                     <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 12 }}>
                       <div style={{ fontSize: '0.875rem', fontWeight: 700, color: 'var(--accent)', fontFamily: 'var(--font-mono)' }}>{step.id}</div>
-                      <step.icon size={24} color="white" />
+                      <step.icon size={24} color="var(--text-primary)" />
                     </div>
                     <h3 style={{ fontSize: '2rem', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: 16 }}>{step.title}</h3>
                     <p style={{ fontSize: '1.125rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{step.desc}</p>

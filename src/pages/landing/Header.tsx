@@ -7,7 +7,7 @@ export default function Header() {
   const background = useTransform(
     scrollY,
     [0, 50],
-    ['rgba(5, 5, 5, 0)', 'rgba(5, 5, 5, 0.85)']
+    ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0.85)']
   );
   const backdropFilter = useTransform(
     scrollY,
@@ -17,7 +17,7 @@ export default function Header() {
   const borderBottom = useTransform(
     scrollY,
     [0, 50],
-    ['1px solid rgba(255, 255, 255, 0)', '1px solid rgba(255, 255, 255, 0.05)']
+    ['1px solid rgba(0, 0, 0, 0)', '1px solid rgba(0, 0, 0, 0.05)']
   );
 
   return (
@@ -36,7 +36,7 @@ export default function Header() {
       <div style={{ maxWidth: 1400, margin: '0 auto', padding: '16px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 12 }}>
           <IDBILogo size={32} showText={false} />
-          <span style={{ fontWeight: 600, fontSize: '1.125rem', letterSpacing: '-0.02em', color: 'white' }}>MSME Intelligence</span>
+          <span style={{ fontWeight: 600, fontSize: '1.125rem', letterSpacing: '-0.02em', color: 'var(--text-primary)' }}>MSME Intelligence</span>
         </Link>
         
         <div style={{ display: 'none', gap: 40, alignItems: 'center', '@media (minWidth: 768px)': { display: 'flex' } } as any}>
@@ -46,10 +46,10 @@ export default function Header() {
         </div>
 
         <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-          <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 500, padding: '8px 16px', borderRadius: 8, transition: 'background 0.2s' }} className="hover-bg-subtle">
+          <Link to="/login" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 600, padding: '8px 16px', borderRadius: 8, transition: 'background 0.2s' }} className="hover-bg-subtle">
             Sign In
           </Link>
-          <Link to="/login" style={{ background: 'white', color: 'black', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 600, padding: '10px 20px', borderRadius: 100, transition: 'transform 0.2s', boxShadow: '0 4px 12px rgba(255,255,255,0.1)' }} className="hover:scale-105">
+          <Link to="/login" style={{ background: 'var(--text-primary)', color: 'white', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 600, padding: '10px 20px', borderRadius: 100, transition: 'transform 0.2s', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }} className="hover:scale-105">
             Get Started
           </Link>
         </div>

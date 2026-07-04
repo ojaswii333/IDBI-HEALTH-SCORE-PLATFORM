@@ -17,20 +17,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 :root {
-  /* Zinc-based neutral palette */
-  --bg-app: #09090B;
-  --bg-surface: #18181B;
-  --bg-elevated: #27272A;
-  --bg-muted: #3F3F46;
-  --bg-hover: rgba(255,255,255,0.04);
-  --bg-active: rgba(255,255,255,0.06);
+  /* Platinum Light Theme */
+  --bg-app: #FFFFFF;
+  --bg-surface: #FAFAFA;
+  --bg-elevated: #F4F4F5;
+  --bg-muted: #E4E4E7;
+  --bg-hover: rgba(0,0,0,0.04);
+  --bg-active: rgba(0,0,0,0.08);
 
-  --text-primary: #FAFAFA;
-  --text-secondary: #A1A1AA;
-  --text-muted: #71717A;
-  --text-inverse: #09090B;
+  --text-primary: #09090B;
+  --text-secondary: #52525B;
+  --text-muted: #A1A1AA;
+  --text-inverse: #FFFFFF;
 
-  --border: #27272A;
+  --border: #E4E4E7;
   --border-hover: #3F3F46;
   --border-active: #52525B;
 
@@ -423,10 +423,69 @@ tbody tr:hover { background: var(--bg-hover); }
   .landing-timeline-flex { flex-direction: row; gap: 24px; }
 }
 
+/* Remove custom cursor on mobile */
+@media (max-width: 768px) {
+  body.landing-page-active {
+    cursor: auto !important;
+  }
+}
+
+/* ============================================
+   RESPONSIVE LAYOUT CLASSES
+   ============================================ */
+
+.responsive-flex {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
 @media (min-width: 1024px) {
-  .login-visual-pane { display: block; }
-  .timeline-line { display: block; }
-  .landing-hero-flex { flex-direction: row; align-items: center; }
+  .responsive-flex {
+    flex-direction: row;
+    align-items: center;
+    gap: 64px;
+  }
+}
+
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .responsive-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+@media (min-width: 768px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .responsive-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.responsive-padding {
+  padding: 80px 24px;
+}
+@media (min-width: 768px) {
+  .responsive-padding {
+    padding: 120px 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .responsive-padding {
+    padding: 160px 48px;
+  }
 }
 
 @media (min-width: 1024px) {

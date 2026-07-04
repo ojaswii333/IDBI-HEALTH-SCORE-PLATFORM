@@ -13,7 +13,7 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section style={{ padding: '160px 24px', background: 'var(--bg-app)' }}>
+    <section className="responsive-padding" style={{ background: 'var(--bg-surface)' }}>
       <div style={{ maxWidth: 800, margin: '0 auto' }}>
         <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 60 }}>
           Frequently asked questions.
@@ -24,7 +24,7 @@ export default function FaqSection() {
             <div key={i} style={{ borderBottom: '1px solid var(--border)', overflow: 'hidden' }}>
               <button 
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 0', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'none', textAlign: 'left' }}
+                style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 0', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer', textAlign: 'left' }}
                 className="card-interactive"
               >
                 <span style={{ fontSize: '1.25rem', fontWeight: 500 }}>{faq.q}</span>

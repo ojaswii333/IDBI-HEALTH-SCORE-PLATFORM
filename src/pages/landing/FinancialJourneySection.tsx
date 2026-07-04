@@ -12,7 +12,7 @@ export default function FinancialJourneySection() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={containerRef} style={{ padding: '160px 24px', background: 'var(--bg-app)' }}>
+    <section ref={containerRef} className="responsive-padding" style={{ background: 'var(--bg-surface)' }}>
       <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center', marginBottom: 100 }}>
         <IDBILogo size={48} showText={false} />
         <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', marginTop: 32 }}>
@@ -38,9 +38,9 @@ export default function FinancialJourneySection() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6 }}
-              style={{ position: 'relative' }}
+              style={{ position: 'relative', background: 'var(--bg-app)', padding: 32, borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}
             >
-              <div style={{ position: 'absolute', left: -46, top: 8, width: 14, height: 14, borderRadius: 7, background: 'var(--bg-app)', border: '2px solid var(--accent)' }} />
+              <div style={{ position: 'absolute', left: -46 - 32, top: 40, width: 14, height: 14, borderRadius: 7, background: 'var(--bg-app)', border: '2px solid var(--accent)' }} />
               <div style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--accent)', marginBottom: 8, fontFamily: 'var(--font-mono)' }}>Phase {item.step}</div>
               <h3 style={{ fontSize: '2rem', fontWeight: 600, letterSpacing: '-0.02em', marginBottom: 16 }}>{item.title}</h3>
               <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{item.desc}</p>

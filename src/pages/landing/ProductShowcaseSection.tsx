@@ -13,7 +13,7 @@ export default function ProductShowcaseSection() {
   const y2 = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   return (
-    <section ref={containerRef} style={{ padding: '160px 24px', background: 'var(--bg-app)', position: 'relative', overflow: 'hidden' }}>
+    <section ref={containerRef} className="responsive-padding" style={{ background: 'var(--bg-app)', position: 'relative', overflow: 'hidden' }}>
       
       <div style={{ textAlign: 'center', marginBottom: 120 }}>
         <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 24 }}>
@@ -24,7 +24,7 @@ export default function ProductShowcaseSection() {
         </p>
       </div>
 
-      <div style={{ maxWidth: 1400, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 40, alignItems: 'center' }}>
+      <div className="responsive-grid-2" style={{ maxWidth: 1400, margin: '0 auto', alignItems: 'center' }}>
         
         {/* Left Column - Floating Mockups */}
         <div style={{ position: 'relative', height: 600, display: 'flex', gap: 24, justifyContent: 'center' }}>
@@ -43,7 +43,7 @@ export default function ProductShowcaseSection() {
               </div>
             </div>
             
-            <div style={{ width: 280, height: 200, background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+            <div style={{ width: 280, height: 200, background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
               <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: 16 }}>Missing Data Imputation</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
                 <Zap size={16} color="var(--accent)" />
@@ -56,7 +56,7 @@ export default function ProductShowcaseSection() {
           </motion.div>
 
           <motion.div style={{ y: y2, display: 'flex', flexDirection: 'column', gap: 24, marginTop: 80 }}>
-            <div style={{ width: 280, height: 260, background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
+            <div style={{ width: 280, height: 260, background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(239, 68, 68, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <ShieldAlert size={20} color="#EF4444" />
               </div>

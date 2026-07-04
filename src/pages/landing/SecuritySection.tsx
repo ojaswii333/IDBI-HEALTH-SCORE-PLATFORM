@@ -13,11 +13,11 @@ export default function SecuritySection() {
   const opacity = useTransform(scrollYProgress, [0, 1], [0.3, 1]);
 
   return (
-    <section ref={containerRef} style={{ padding: '160px 24px', background: 'transparent', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
+    <section ref={containerRef} className="responsive-padding" style={{ background: 'var(--bg-surface)', borderTop: '1px solid var(--border)', position: 'relative', overflow: 'hidden' }}>
       
       {/* Background Lock Icon Graphic */}
       <motion.div 
-        style={{ position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%', opacity: 0.03, pointerEvents: 'none' }}
+        style={{ position: 'absolute', top: '50%', left: '50%', x: '-50%', y: '-50%', opacity: 0.02, pointerEvents: 'none', color: 'var(--text-primary)' }}
       >
         <Lock size={800} />
       </motion.div>
@@ -35,14 +35,14 @@ export default function SecuritySection() {
           </p>
         </motion.div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24 }}>
+        <div className="responsive-grid-3">
           {[
             { icon: Lock, title: '256-bit Encryption', desc: 'All data is encrypted in transit using TLS 1.3 and at rest using AES-256.' },
             { icon: Eye, title: 'Zero Data Retention', desc: 'We only extract required features. We do not store raw bank statements after analysis.' },
             { icon: FileText, title: 'RBI Framework', desc: 'Fully compliant with RBI guidelines on digital lending and explainable AI.' }
           ].map((item, i) => (
-            <div key={i} style={{ padding: 32, background: 'rgba(255,255,255,0.03)', borderRadius: 24, border: '1px solid rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }}>
-              <item.icon size={28} color="var(--text-primary)" style={{ marginBottom: 24 }} />
+            <div key={i} style={{ padding: 32, background: 'var(--bg-app)', borderRadius: 24, border: '1px solid var(--border)', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
+              <item.icon size={28} color="var(--accent)" style={{ marginBottom: 24 }} />
               <h4 style={{ fontSize: '1.25rem', fontWeight: 600, marginBottom: 12 }}>{item.title}</h4>
               <p style={{ color: 'var(--text-secondary)', lineHeight: 1.6 }}>{item.desc}</p>
             </div>

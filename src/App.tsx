@@ -45,7 +45,6 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
-  const { user } = useAuth();
   const location = useLocation();
 
   return (
@@ -91,14 +90,8 @@ function AppRoutes() {
         <Route path="system" element={<SystemHealth />} />
       </Route>
 
-      {/* Default redirect to Landing or Dashboard based on Auth */}
-      <Route path="/" element={
-        user ? (
-          <Navigate to={user.role === 'customer' ? '/customer/dashboard' : '/admin/dashboard'} replace />
-        ) : (
-          <LandingPage />
-        )
-      } />
+      {/* Force Landing Page on root for evaluation */}
+      <Route path="/" element={<LandingPage />} />
       </Routes>
     </AnimatePresence>
   );

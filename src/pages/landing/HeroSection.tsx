@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Activity, TrendingUp } from 'lucide-react';
 import { useEffect, useState } from 'react';
@@ -38,6 +38,26 @@ function StaggeredText({ text, highlightWord }: { text: string, highlightWord?: 
 function LiveHealthCard() {
   const [score, setScore] = useState(300);
   
+  // 3D Parallax state
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const rotateX = useTransform(mouseY, [-100, 100], [10, -10]);
+  const rotateY = useTransform(mouseX, [-100, 100], [-10, 10]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+  
   useEffect(() => {
     const dur = 2000, start = 300, end = 782, t0 = Date.now();
     const anim = () => {
@@ -55,21 +75,28 @@ function LiveHealthCard() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 40, rotateX: 10 }}
-      animate={{ opacity: 1, y: 0, rotateX: 0 }}
-      transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      initial={{ opacity: 0, y: 40, rotateX: 20, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+      transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       style={{
-        width: 340,
+        width: 380,
         background: 'rgba(255, 255, 255, 0.03)',
-        backdropFilter: 'blur(20px)',
+        backdropFilter: 'blur(30px)',
         border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: 24,
-        padding: 32,
-        boxShadow: '0 24px 48px rgba(0,0,0,0.4)',
+        borderRadius: 32,
+        padding: 40,
+        boxShadow: '0 30px 60px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.05)',
         position: 'relative',
-        transformStyle: 'preserve-3d'
+        transformStyle: 'preserve-3d',
+        rotateX,
+        rotateY,
+        perspective: 1000
       }}
     >
+      <div style={{ position: 'absolute', inset: -10, background: 'radial-gradient(circle at 50% 0%, rgba(245, 130, 32, 0.15), transparent 60%)', borderRadius: 'inherit', pointerEvents: 'none' }} />
+      <div style={{ position: 'relative', zIndex: 2 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 32 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{ width: 32, height: 32, borderRadius: 8, background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -124,6 +151,7 @@ function LiveHealthCard() {
         <TrendingUp size={16} color="var(--accent)" />
         <span style={{ fontSize: '0.75rem', fontWeight: 600 }}>+42 Points YoY</span>
       </motion.div>
+      </div>
     </motion.div>
   );
 }
@@ -152,23 +180,42 @@ export default function HeroSection() {
       background: '#050505'
     }}>
       
-      {/* Background Slideshow */}
+      {/* Background Slideshow & Gradients */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <AnimatePresence mode="wait">
           <motion.img
             key={bgIndex}
             src={backgrounds[bgIndex]}
             initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 0.35, scale: 1 }}
+            animate={{ opacity: 0.25, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: 'easeInOut' }}
             style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
             alt="Enterprise Banking Background"
           />
         </AnimatePresence>
-        {/* Gradients to ensure text readability */}
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(5,5,5,1) 0%, rgba(5,5,5,0.4) 50%, transparent 100%)' }} />
-        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top right, rgba(0, 131, 108, 0.2), transparent 40%), radial-gradient(circle at bottom left, rgba(245, 130, 32, 0.15), transparent 40%)' }} />
+        
+        {/* Animated Tech Grid */}
+        <div style={{ 
+          position: 'absolute', inset: 0, 
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+          backgroundSize: '50px 50px',
+          backgroundPosition: 'center center',
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
+          zIndex: 1,
+          pointerEvents: 'none'
+        }}>
+          <motion.div 
+            animate={{ backgroundPosition: ['0px 0px', '0px 50px'] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+            style={{ position: 'absolute', inset: 0, backgroundImage: 'inherit', backgroundSize: 'inherit' }}
+          />
+        </div>
+
+        {/* Deep Dark Gradients to ensure text readability */}
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(5,5,5,1) 0%, rgba(5,5,5,0.6) 50%, transparent 100%)', zIndex: 2 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top right, rgba(0, 131, 108, 0.2), transparent 40%), radial-gradient(circle at bottom left, rgba(245, 130, 32, 0.15), transparent 40%)', zIndex: 2 }} />
         
         {/* Floating Glass Orbs */}
         <motion.div 

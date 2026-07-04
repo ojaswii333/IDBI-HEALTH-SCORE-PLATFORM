@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 
@@ -13,34 +13,38 @@ export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="responsive-padding" style={{ background: 'var(--bg-surface)' }}>
-      <div style={{ maxWidth: 800, margin: '0 auto' }}>
-        <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 60 }}>
+    <section className="responsive-padding" style={{ background: 'linear-gradient(135deg, #FF7E5F 0%, #FEB47B 100%)', position: 'relative' }}>
+      <div style={{ maxWidth: 800, margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <h2 style={{ fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 60, color: '#FFFFFF' }}>
           Frequently asked questions.
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', borderTop: '1px solid var(--border)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           {faqs.map((faq, i) => (
-            <div key={i} style={{ borderBottom: '1px solid var(--border)', overflow: 'hidden' }}>
+            <div key={i} style={{ background: 'rgba(255,255,255,0.7)', backdropFilter: 'blur(16px)', borderRadius: 16, border: '1px solid rgba(255,255,255,0.8)', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
               <button 
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '32px 0', background: 'none', border: 'none', color: 'var(--text-primary)', cursor: 'pointer', textAlign: 'left' }}
+                style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px 32px', background: 'none', border: 'none', color: '#431407', cursor: 'pointer', textAlign: 'left' }}
                 className="card-interactive"
               >
-                <span style={{ fontSize: '1.25rem', fontWeight: 500 }}>{faq.q}</span>
-                {openIndex === i ? <Minus size={24} color="var(--text-secondary)" /> : <Plus size={24} color="var(--text-secondary)" />}
+                <span style={{ fontSize: '1.25rem', fontWeight: 600 }}>{faq.q}</span>
+                {openIndex === i ? <Minus size={24} color="#9A3412" /> : <Plus size={24} color="#9A3412" />}
               </button>
               
-              <motion.div
-                initial={false}
-                animate={{ height: openIndex === i ? 'auto' : 0, opacity: openIndex === i ? 1 : 0 }}
-                transition={{ duration: 0.3, ease: 'easeInOut' }}
-                style={{ overflow: 'hidden' }}
-              >
-                <div style={{ paddingBottom: 32, fontSize: '1.125rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>
-                  {faq.a}
-                </div>
-              </motion.div>
+              <AnimatePresence>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div style={{ padding: '0 32px 32px', color: '#9A3412', fontSize: '1.125rem', lineHeight: 1.6 }}>
+                      {faq.a}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>

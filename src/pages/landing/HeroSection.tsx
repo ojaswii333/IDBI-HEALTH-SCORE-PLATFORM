@@ -129,14 +129,14 @@ export default function HeroSection() {
       alignItems: 'center', 
       position: 'relative', 
       overflow: 'hidden',
-      background: 'transparent'
+      background: 'linear-gradient(135deg, #09090B 0%, #00836C 50%, #4C1D95 100%)'
     }}>
       
-      {/* Light Background Pattern */}
+      {/* Dynamic Light Overlay */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <div style={{ 
           position: 'absolute', inset: 0, 
-          backgroundImage: 'radial-gradient(#E5E7EB 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
           maskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
           WebkitMaskImage: 'radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%)',
@@ -155,21 +155,21 @@ export default function HeroSection() {
                 Premium Platinum UI
               </div>
               
-              <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 32, color: 'var(--text-primary)' }}>
+              <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, marginBottom: 32, color: '#FFFFFF' }}>
                 Intelligence <br/>
-                <span style={{ color: 'var(--text-muted)' }}>that scales </span>
+                <span style={{ color: 'rgba(255,255,255,0.7)' }}>that scales </span>
                 India.
               </h1>
               
-              <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 48, maxWidth: 500, fontWeight: 400 }}>
+              <p style={{ fontSize: '1.25rem', color: 'rgba(255,255,255,0.9)', lineHeight: 1.6, marginBottom: 48, maxWidth: 500, fontWeight: 400 }}>
                 A highly secure, AI-driven financial platform designed exclusively to give Indian MSMEs unprecedented visibility and access to institutional credit.
               </p>
               
               <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-                <Link to="/login" className="btn btn-primary" style={{ padding: '18px 36px', fontSize: '1rem', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600, background: 'var(--text-primary)', color: 'white', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+                <Link to="/login" className="btn btn-primary" style={{ padding: '18px 36px', fontSize: '1rem', borderRadius: 100, display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600, background: '#FFFFFF', color: '#09090B', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
                   Start Assessment <ArrowRight size={18} />
                 </Link>
-                <Link to="/login" style={{ padding: '18px 32px', fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Link to="/login" style={{ padding: '18px 32px', fontSize: '1rem', fontWeight: 600, color: '#FFFFFF', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, background: 'rgba(255,255,255,0.1)', borderRadius: 100, backdropFilter: 'blur(10px)' }}>
                   View Architecture
                 </Link>
               </div>

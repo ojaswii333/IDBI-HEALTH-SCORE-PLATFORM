@@ -13,14 +13,14 @@ export default function ProductShowcaseSection() {
   const y2 = useTransform(scrollYProgress, [0, 1], [-100, 100]);
 
   return (
-    <section ref={containerRef} className="responsive-padding" style={{ background: 'var(--bg-app)', position: 'relative', overflow: 'hidden' }}>
+    <section ref={containerRef} className="responsive-padding" style={{ background: 'linear-gradient(135deg, #F3F4F6 0%, #E0F2FE 100%)', position: 'relative', overflow: 'hidden' }}>
       
       <div style={{ textAlign: 'center', marginBottom: 120 }}>
-        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 24 }}>
-          A dashboard that <br/> thinks for you.
+        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', fontWeight: 800, letterSpacing: '-0.03em', marginBottom: 24, color: '#0F172A' }}>
+          Engineered for <br/> absolute precision.
         </h2>
-        <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: 600, margin: '0 auto' }}>
-          Stop wrestling with messy spreadsheets. Our platform synthesizes your raw data into a beautiful, actionable intelligence hub.
+        <p style={{ fontSize: '1.25rem', color: '#334155', maxWidth: 600, margin: '0 auto', lineHeight: 1.6 }}>
+          Experience a suite of AI products built to eliminate manual errors and deliver instantaneous underwriting decisions.
         </p>
       </div>
 
@@ -43,26 +43,28 @@ export default function ProductShowcaseSection() {
               </div>
             </div>
             
-            <div style={{ width: 280, height: 200, background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
-              <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: 16 }}>Missing Data Imputation</div>
+            <div style={{ width: 280, height: 200, background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.05)', backdropFilter: 'blur(20px)' }}>
+              <div style={{ fontSize: '0.875rem', color: '#475569', marginBottom: 16 }}>Missing Data Imputation</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
-                <Zap size={16} color="var(--accent)" />
-                <span style={{ fontSize: '0.875rem', fontWeight: 600 }}>GST Returns Estimated</span>
+                <Zap size={16} color="#0EA5E9" />
+                <span style={{ fontSize: '1.25rem', fontWeight: 600, color: '#0F172A' }}>99.9% Accuracy</span>
               </div>
-              <div style={{ height: 4, background: 'var(--bg-elevated)', borderRadius: 2, overflow: 'hidden' }}>
-                <motion.div initial={{ width: 0 }} whileInView={{ width: '85%' }} viewport={{ once: true }} transition={{ duration: 1 }} style={{ height: '100%', background: 'var(--accent)' }} />
-              </div>
+              <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.5 }}>Our models automatically reconstruct missing statement gaps using sovereign data.</p>
             </div>
           </motion.div>
 
           <motion.div style={{ y: y2, display: 'flex', flexDirection: 'column', gap: 24, marginTop: 80 }}>
-            <div style={{ width: 280, height: 260, background: 'var(--bg-surface)', border: '1px solid var(--border)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.05)' }}>
+            <div style={{ width: 280, height: 260, background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: 24, padding: 24, boxShadow: '0 20px 40px rgba(0,0,0,0.05)', backdropFilter: 'blur(20px)' }}>
                <div style={{ width: 40, height: 40, borderRadius: 10, background: 'rgba(239, 68, 68, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 20 }}>
                 <ShieldAlert size={20} color="#EF4444" />
               </div>
-              <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: 8 }}>Anomaly Detection</div>
-              <div style={{ fontSize: '1.25rem', fontWeight: 600, color: '#EF4444', marginBottom: 12 }}>2 Irregular Transactions</div>
-              <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>Isolation Forest model flagged unusual vendor payouts in Q3.</p>
+              <h4 style={{ fontSize: '1.125rem', fontWeight: 600, marginBottom: 8, color: '#0F172A' }}>Fraud Detected</h4>
+              <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.5, marginBottom: 20 }}>Anomalous transaction velocity detected across 3 accounts.</p>
+              
+              <div style={{ height: 4, background: '#E2E8F0', borderRadius: 2, overflow: 'hidden' }}>
+                <div style={{ width: '85%', height: '100%', background: '#EF4444' }} />
+              </div>
+              <div style={{ fontSize: '0.75rem', color: '#EF4444', marginTop: 8, fontWeight: 600 }}>85% Risk Score</div>
             </div>
           </motion.div>
         </div>

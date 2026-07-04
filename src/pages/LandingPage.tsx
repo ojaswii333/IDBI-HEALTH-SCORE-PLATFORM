@@ -37,12 +37,12 @@ export default function LandingPage() {
       <main style={{ position: 'relative', zIndex: 10 }}>
         <HeroSection />
         <TrustedBySection />
+        <FutureOfBankingSection />
         <HowItWorksSection />
         <ProductShowcaseSection />
         <FinancialJourneySection />
         <GrowthInsightsSection />
         <SecuritySection />
-        <FutureOfBankingSection />
         <FaqSection />
         <CtaSection />
       </main>

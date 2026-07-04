@@ -7,21 +7,30 @@ import { AnimatePresence } from 'framer-motion';
 const backgrounds = ['/bg-1.png', '/bg-2.png', '/bg-3.png'];
 
 // Staggered text component for premium reveal
-function StaggeredText({ text }: { text: string }) {
+function StaggeredText({ text, highlightWord }: { text: string, highlightWord?: string }) {
   const words = text.split(" ");
   return (
     <>
-      {words.map((word, i) => (
-        <span key={i} style={{ display: 'inline-block', overflow: 'hidden' }}>
-          <motion.span
-            initial={{ y: "100%", opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-            style={{ display: 'inline-block', marginRight: word.includes('<br>') ? 0 : '0.3em' }}
-            dangerouslySetInnerHTML={{ __html: word === '<br/>' ? '<br/>' : word }}
-          />
-        </span>
-      ))}
+      {words.map((word, i) => {
+        const isHighlight = highlightWord && word.includes(highlightWord);
+        const cleanWord = word.replace('<br/>', '');
+        return (
+          <span key={i} style={{ display: 'inline-block', overflow: 'hidden', marginRight: word.includes('<br>') ? 0 : '0.3em' }}>
+            <motion.span
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              style={{ 
+                display: 'inline-block', 
+                color: isHighlight ? 'var(--accent-secondary)' : 'inherit' 
+              }}
+            >
+              {cleanWord}
+            </motion.span>
+            {word.includes('<br/>') && <br/>}
+          </span>
+        );
+      })}
     </>
   );
 }
@@ -186,7 +195,7 @@ export default function HeroSection() {
                 IDBI Digital Transformation 2.0
               </div>
               <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 24, display: 'flex', flexWrap: 'wrap' }}>
-                <StaggeredText text="Intelligent banking for the <span style='color:var(--accent-secondary)'>ambitious.</span>" />
+                <StaggeredText text="Intelligent banking for the ambitious." highlightWord="ambitious." />
               </h1>
               <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 48, maxWidth: 500 }}>
                 A highly secure, AI-driven financial platform designed exclusively to give Indian MSMEs unprecedented visibility and access to credit.

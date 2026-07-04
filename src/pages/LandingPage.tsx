@@ -1,14 +1,27 @@
 import { Link } from 'react-router-dom';
 import IDBILogo from '../components/IDBILogo';
+import Preloader from '../components/Preloader';
+import CustomCursor from '../components/CustomCursor';
 import HeroSection from './landing/HeroSection';
 import FeaturesSection from './landing/FeaturesSection';
 import JourneySection from './landing/JourneySection';
 import TrustSection from './landing/TrustSection';
 import CtaSection from './landing/CtaSection';
+import { useState, useEffect } from 'react';
 
 export default function LandingPage() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Add global class for cursor hiding
+    document.body.classList.add('landing-page-active');
+    return () => document.body.classList.remove('landing-page-active');
+  }, []);
+
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-app)', color: 'var(--text-primary)', overflowX: 'hidden' }}>
+      <CustomCursor />
+      {!isLoaded && <Preloader onComplete={() => setIsLoaded(true)} />}
       
       {/* Navigation */}
       <nav style={{

@@ -386,6 +386,28 @@ tbody tr:hover { background: var(--bg-hover); }
 .landing-hero-flex { flex-direction: column; }
 .landing-timeline-flex { flex-direction: column; }
 
+/* Spotlight Effect */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(245,130,32,0.1), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  z-index: 1;
+}
+.spotlight-card:hover::before {
+  opacity: 1;
+}
+
 @media (min-width: 768px) {
   .landing-timeline-flex { flex-direction: row; gap: 24px; }
 }
@@ -394,4 +416,11 @@ tbody tr:hover { background: var(--bg-hover); }
   .login-visual-pane { display: block; }
   .timeline-line { display: block; }
   .landing-hero-flex { flex-direction: row; align-items: center; }
+}
+
+@media (min-width: 1024px) {
+  .landing-page-active { cursor: none !important; }
+  .landing-page-active a, 
+  .landing-page-active button,
+  .landing-page-active .card-interactive { cursor: none !important; }
 }

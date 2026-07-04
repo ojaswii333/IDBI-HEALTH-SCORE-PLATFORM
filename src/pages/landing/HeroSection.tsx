@@ -6,6 +6,26 @@ import { AnimatePresence } from 'framer-motion';
 
 const backgrounds = ['/bg-1.png', '/bg-2.png', '/bg-3.png'];
 
+// Staggered text component for premium reveal
+function StaggeredText({ text }: { text: string }) {
+  const words = text.split(" ");
+  return (
+    <>
+      {words.map((word, i) => (
+        <span key={i} style={{ display: 'inline-block', overflow: 'hidden' }}>
+          <motion.span
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            style={{ display: 'inline-block', marginRight: word.includes('<br>') ? 0 : '0.3em' }}
+            dangerouslySetInnerHTML={{ __html: word === '<br/>' ? '<br/>' : word }}
+          />
+        </span>
+      ))}
+    </>
+  );
+}
+
 function LiveHealthCard() {
   const [score, setScore] = useState(300);
   
@@ -140,6 +160,18 @@ export default function HeroSection() {
         {/* Gradients to ensure text readability */}
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(5,5,5,1) 0%, rgba(5,5,5,0.4) 50%, transparent 100%)' }} />
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at top right, rgba(0, 131, 108, 0.2), transparent 40%), radial-gradient(circle at bottom left, rgba(245, 130, 32, 0.15), transparent 40%)' }} />
+        
+        {/* Floating Glass Orbs */}
+        <motion.div 
+          animate={{ x: [0, 40, 0], y: [0, -40, 0], rotate: [0, 90, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', top: '10%', right: '15%', width: 300, height: 300, borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,131,108,0.4) 0%, transparent 70%)', filter: 'blur(40px)', zIndex: 1 }}
+        />
+        <motion.div 
+          animate={{ x: [0, -30, 0], y: [0, 50, 0], rotate: [0, -90, 0] }}
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+          style={{ position: 'absolute', bottom: '20%', left: '10%', width: 400, height: 400, borderRadius: '50%', background: 'radial-gradient(circle, rgba(245,130,32,0.2) 0%, transparent 70%)', filter: 'blur(50px)', zIndex: 1 }}
+        />
       </div>
 
       <motion.div style={{ y, opacity, width: '100%', position: 'relative', zIndex: 10 }}>
@@ -147,14 +179,14 @@ export default function HeroSection() {
           
           <div style={{ flex: 1, maxWidth: 600, zIndex: 10 }}>
             <motion.div 
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 100, marginBottom: 32, fontSize: '0.8125rem', fontWeight: 500, backdropFilter: 'blur(10px)' }}>
                 <span style={{ width: 8, height: 8, borderRadius: 4, background: 'var(--success)', boxShadow: '0 0 10px var(--success)' }} />
                 IDBI Digital Transformation 2.0
               </div>
-              <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 24 }}>
-                Intelligent banking for the <span style={{ color: 'var(--accent-secondary)' }}>ambitious.</span>
+              <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.03em', lineHeight: 1.05, marginBottom: 24, display: 'flex', flexWrap: 'wrap' }}>
+                <StaggeredText text="Intelligent banking for the <span style='color:var(--accent-secondary)'>ambitious.</span>" />
               </h1>
               <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', lineHeight: 1.6, marginBottom: 48, maxWidth: 500 }}>
                 A highly secure, AI-driven financial platform designed exclusively to give Indian MSMEs unprecedented visibility and access to credit.

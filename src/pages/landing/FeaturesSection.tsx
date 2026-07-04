@@ -25,6 +25,15 @@ const capabilities = [
 ];
 
 export default function FeaturesSection() {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const target = e.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    target.style.setProperty('--mouse-x', `${x}px`);
+    target.style.setProperty('--mouse-y', `${y}px`);
+  };
+
   return (
     <section style={{ padding: '160px 24px', background: 'var(--bg-app)', position: 'relative' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -52,7 +61,8 @@ export default function FeaturesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="card"
+              className="card spotlight-card"
+              onMouseMove={handleMouseMove}
               style={{ 
                 padding: 40, 
                 background: 'var(--bg-surface)', 
@@ -63,11 +73,13 @@ export default function FeaturesSection() {
                 overflow: 'hidden'
               }}
             >
-              <div style={{ width: 56, height: 56, borderRadius: 16, background: 'var(--bg-elevated)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 32 }}>
-                <cap.icon size={28} color="var(--text-primary)" />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div style={{ width: 56, height: 56, borderRadius: 16, background: 'var(--bg-elevated)', border: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 32 }}>
+                  <cap.icon size={28} color="var(--text-primary)" />
+                </div>
+                <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: 16, letterSpacing: '-0.02em' }}>{cap.title}</h3>
+                <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{cap.desc}</p>
               </div>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: 16, letterSpacing: '-0.02em' }}>{cap.title}</h3>
-              <p style={{ fontSize: '1rem', color: 'var(--text-secondary)', lineHeight: 1.6 }}>{cap.desc}</p>
               
               {/* Subtle hover gradient */}
               <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 100% 100%, rgba(245,130,32,0.05), transparent 60%)', opacity: 0, transition: 'opacity 0.3s ease', pointerEvents: 'none' }} className="feature-hover-gradient" />
